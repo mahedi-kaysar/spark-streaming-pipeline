@@ -5,26 +5,15 @@ LABEL maintainer="md.mahedi.kaysar@gmail.com"
 WORKDIR /home/
 ## install necessary packages
 RUN apt-get update && apt-get install -y curl vim wget software-properties-common ssh net-tools
-#RUN apt-get install -y python3 python3-pip python3-numpy python3-matplotlib python3-scipy python3-pandas python3-simpy
-## set python3 as default (currently python 3.5)
-#RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
-## move files from downloads folder at the host to /home in the container
-## comment this line if you prefer to download during the build process
-## uncomment next two lines if you prefer to download during the build process
-#RUN curl -L -b "oraclelicense=a" -O https://download.oracle.com/otn/java/jdk/8u261-b12/a4634525489241b9a9e1aa73d9e118e6/jdk-8u261-linux-x64.tar.gz?xd_co_f=9050760a-0aca-4d1c-9ae2-8826fbb1f9fa
-RUN curl -L -O http://apache.mirror.anlx.net/spark/spark-3.0.1/spark-3.0.1-bin-hadoop2.7.tgz
+RUN apt-get install -y python3 python3-pip
+RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
+RUN pip3 install kafka-python
+RUN pip3 install websockets
+RUN pip3 install websocket-client
+# install JDK 8
 RUN apt-get install -y openjdk-8-jdk
-## configure java jdk 8
-#RUN mkdir -p /usr/local/oracle-java-8
-#RUN file jdk-8u261-linux-x64.tar.gz?xd_co_f=9050760a-0aca-4d1c-9ae2-8826fbb1f9fa
-#RUN tar xvzf jdk-8u261-linux-x64.tar.gz -C /usr/local/oracle-java-8/
-#RUN rm  jdk-8u261-linux-x64.tar.gz
-RUN java -version
-#RUN update-alternatives --install "/usr/bin/java" "java" "/usr/local/oracle-java-8/jdk1.8.0_191/bin/java" 1
-#RUN update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/oracle-java-8/jdk1.8.0_191/bin/javac" 1
-#RUN update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/oracle-java-8/jdk1.8.0_191/bin/javaws" 1
-#ENV JAVA_HOME="/usr/local/oracle-java-8/jdk1.8.0_191"
 ## configure spark
+RUN curl -L -O http://apache.mirror.anlx.net/spark/spark-3.0.1/spark-3.0.1-bin-hadoop2.7.tgz
 RUN mkdir -p /usr/local/spark-3.0.1
 RUN tar -zxf spark-3.0.1-bin-hadoop2.7.tgz -C /usr/local/spark-3.0.1/
 RUN rm spark-3.0.1-bin-hadoop2.7.tgz
@@ -53,14 +42,3 @@ EXPOSE 7000-8000
 EXPOSE 8080
 ## expose for slave webui
 EXPOSE 8081
-
-COPY target/StreamingPipeline-1.0-SNAPSHOT-jar-with-dependencies.jar /home/
-
-RUN apt-get install -y python3 python3-pip
-## set python3 as default (currently python 3.5)
-RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
-RUN pip3 install kafka-python
-COPY python/meetup_producer.py /home/meetup_producer.py
-COPY python/meetup_consumber.py /home/meetup_consumber.py
-RUN python --version
-RUN pip3 install websockets
