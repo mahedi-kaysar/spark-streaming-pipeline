@@ -7,8 +7,12 @@ import org.example.model.MeetupRsvpsMessage;
 
 import java.util.Map;
 
+/*
+This Class Deserializes the meetup rsvps streams polling from kafka topic.
+ */
 public class MeetupRsvpsDeserializer implements Deserializer<MeetupRsvpsMessage> {
     private Gson gson = new Gson();
+
     @Override
     public void close() {
     }

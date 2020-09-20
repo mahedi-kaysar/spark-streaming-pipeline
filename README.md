@@ -27,8 +27,8 @@ $ sh bin/start-containers.sh
 Open a terminal and submit the jar in spark cluster
 ```
 docker exec spark-master spark-submit \
-  --class org.example.MeetupRsvpsAnalizer \
-  /home/target/spark-streaming-pipeline-1.0-SNAPSHOT-jar-with-dependencies.jar
+  --class org.example.TopKTrendingMeetupTopicsFinder \
+  /home/target/spark-streaming-pipeline-1.0-SNAPSHOT-jar-with-dependencies.jar kafka-broker:9092 meetup-rsvps-topic 1 10 us california /home/output/out.txt
 ```
 Open another terminal and run the meetup_producer.py
 
