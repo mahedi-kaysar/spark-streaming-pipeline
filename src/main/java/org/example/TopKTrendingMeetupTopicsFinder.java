@@ -183,9 +183,9 @@ public class TopKTrendingMeetupTopicsFinder {
     private JavaDStream<MeetupRsvpsMessage> filterEventsByCountyAndCity(String countryName, String cityName,
        JavaInputDStream<ConsumerRecord<String, MeetupRsvpsMessage>> meetupRawEvents) {
         return meetupRawEvents.map(
-                v -> v.value()).filter(meetupRsvpsMessage -> {
-            return !meetupRsvpsMessage.getGroup().getGroup_country().equalsIgnoreCase(countryName);
-            //&& meetupRsvpsMessage.getGroup().getGroup_city().equalsIgnoreCase(cityToFilterName);
+            v -> v.value()).filter(meetupRsvpsMessage -> {
+            return !meetupRsvpsMessage.getGroup().getGroup_country().equalsIgnoreCase(countryName)
+            && meetupRsvpsMessage.getGroup().getGroup_city().equalsIgnoreCase(cityToFilterName);
         });
     }
 
@@ -194,21 +194,21 @@ public class TopKTrendingMeetupTopicsFinder {
      * @param file
      * @param numberOfTrendingTopicsPerMinutes
      * @param windowDurationInMinutes
-     * @param hashtagRDD
+     * @param trendTopicRdd
      * @throws IOException
      */
     private void writeTopHashtagsToFile(File file, int numberOfTrendingTopicsPerMinutes,
-       int windowDurationInMinutes, JavaPairRDD<Integer, String> hashtagRDD) throws IOException {
+       int windowDurationInMinutes, JavaPairRDD<Integer, String> trendTopicRdd) throws IOException {
         DateTime currentTime = DateTime.now(DateTimeZone.forID(timeZoneId));
         String timeRange = dateTimeFormat.print(currentTime.minusSeconds(windowDurationInMinutes * 60))
                 + " to " + dateTimeFormat.print(currentTime) + " (UTC Time)";
         Files.append("Top " + numberOfTrendingTopicsPerMinutes + " meetup topics captured from " + timeRange + ":\n",
                 file, Charset.forName("UTF-8"));
 
-        List<Tuple2<Integer, String>> topHashtags = hashtagRDD.take(numberOfTrendingTopicsPerMinutes);
-        topHashtags.forEach(countAndHashtag -> {
+        List<Tuple2<Integer, String>> topTrendTopics = trendTopicRdd.take(numberOfTrendingTopicsPerMinutes);
+        trendTopicRdd.foreach(rdd -> {
             try {
-                Files.append(countAndHashtag.toString() + "\n", file, Charset.forName("UTF-8"));
+                Files.append(rdd.toString() + "\n", file, Charset.forName("UTF-8"));
             } catch (IOException e) {
                 log.error("error while writing output to file");
             }
