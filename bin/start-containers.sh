@@ -1,11 +1,11 @@
 #!/bin/bash
 
 set -eu
-set -o pipefail
 
 docker network create --driver bridge meetuprsvps-local-network
 docker run -d -t --name zookeeper --network=meetuprsvps-local-network \
-  -e ZOOKEEPER_CLIENT_PORT=2181 wurstmeister/zookeeper
+  -e ZOOKEEPER_CLIENT_PORT=2181 \
+  wurstmeister/zookeeper
 
 docker run -d -t --name kafka-broker --network=meetuprsvps-local-network \
    -p 9092:9092 \
@@ -19,7 +19,8 @@ docker run -d -t --name spark-master --network meetuprsvps-local-network \
   -p 9999:8080 \
   -v "$(pwd)"/target/:/home/target/ \
   -v "$(pwd)"/python/:/home/python/ \
-  -v "$(pwd)"/output/:/home/outout/
+  -v "$(pwd)"/output/:/home/output/ \
+  spark-ubuntu:1.0
 
 docker exec spark-master start-master
 docker run -d -t --name spark-worker-1 --network meetuprsvps-local-network \
