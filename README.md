@@ -74,3 +74,9 @@ docker exec spark-master tail /home/output/out.txt -f
 ```
 $ sh bin/start-containers.sh
 ```
+### Future Improvement
+
+* Use appropriate design pattern and test properly (unit and acceptance tests)
+* Real config files 
+* use dynamic configurations to allow filters and transformation pluggable.
+* Deploy in Cloud managed spark cluster. 
