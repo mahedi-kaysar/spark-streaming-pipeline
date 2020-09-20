@@ -23,10 +23,10 @@ public class Event implements Serializable {
     @Override
     public String toString() {
         return "Event{" +
-                "event_id=" + event_id +
-                ", event_name='" + event_name + '\'' +
-                ", event_url='" + event_url + '\'' +
-                ", time=" + time +
-                '}';
+            "event_id=" + event_id +
+            ", event_name='" + event_name + '\'' +
+            ", event_url='" + event_url + '\'' +
+            ", time=" + time +
+            '}';
     }
 }

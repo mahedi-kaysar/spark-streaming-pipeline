@@ -26,15 +26,15 @@ public class MeetupRsvpsMessage implements Serializable {
     @Override
     public String toString() {
         return "RsvpMessage{" +
-                "venue=" + venue +
-                ", visibility='" + visibility + '\'' +
-                ", response='" + response + '\'' +
-                ", guests=" + guests +
-                ", member=" + member +
-                ", rsvp_id=" + rsvp_id +
-                ", mtime=" + mtime +
-                ", event=" + event +
-                ", group=" + group +
-                '}';
+            "venue=" + venue +
+            ", visibility='" + visibility + '\'' +
+            ", response='" + response + '\'' +
+            ", guests=" + guests +
+            ", member=" + member +
+            ", rsvp_id=" + rsvp_id +
+            ", mtime=" + mtime +
+            ", event=" + event +
+            ", group=" + group +
+            '}';
     }
 }

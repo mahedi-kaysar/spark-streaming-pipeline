@@ -12,6 +12,7 @@ producer = KafkaProducer(
     bootstrap_servers=['kafka-broker:9092'])
 
 def on_message(ws, message):
+     #print(message)
      m = json.loads(message)
      producer.send('meetup-rsvps-topic', m)
      producer.flush()

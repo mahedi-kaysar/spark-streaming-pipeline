@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.example.deserializer.MeetupRsvpsDeserializer;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
 This class configures the kafka consumer. Ideally it should able to read properties from config file.
  */
 @Data
-public class KafkaConsumerConfig {
+public class KafkaConsumerConfig implements Serializable {
     private String kafkaBrokers;
     private String kafkaGroup;
     private Map<String, Object> kafkaConsumerProperties;

@@ -24,10 +24,10 @@ public class Venue implements Serializable {
     @Override
     public String toString() {
         return "Venue{" +
-                "venue_id=" + venue_id +
-                ", venue_name='" + venue_name + '\'' +
-                ", lon=" + lon +
-                ", lat=" + lat +
-                '}';
+            "venue_id=" + venue_id +
+            ", venue_name='" + venue_name + '\'' +
+            ", lon=" + lon +
+            ", lat=" + lat +
+            '}';
     }
 }

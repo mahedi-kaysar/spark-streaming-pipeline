@@ -29,15 +29,15 @@ public class Group implements Serializable {
     @Override
     public String toString() {
         return "Group{" +
-                "group_id=" + group_id +
-                ", group_name='" + group_name + '\'' +
-                ", group_city='" + group_city + '\'' +
-                ", group_state='" + group_state + '\'' +
-                ", group_country='" + group_country + '\'' +
-                ", group_lon=" + group_lon +
-                ", group_lat=" + group_lat +
-                ", group_urlname='" + group_urlname + '\'' +
-                ", group_topics=" + group_topics +
-                '}';
+            "group_id=" + group_id +
+            ", group_name='" + group_name + '\'' +
+            ", group_city='" + group_city + '\'' +
+            ", group_state='" + group_state + '\'' +
+            ", group_country='" + group_country + '\'' +
+            ", group_lon=" + group_lon +
+            ", group_lat=" + group_lat +
+            ", group_urlname='" + group_urlname + '\'' +
+            ", group_topics=" + group_topics +
+            '}';
     }
 }

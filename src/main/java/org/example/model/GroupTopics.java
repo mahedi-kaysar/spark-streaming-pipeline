@@ -21,8 +21,8 @@ public class GroupTopics implements Serializable {
     @Override
     public String toString() {
         return "GroupTopics{" +
-                "urlkey='" + urlkey + '\'' +
-                ", topic_name='" + topic_name + '\'' +
-                '}';
+            "urlkey='" + urlkey + '\'' +
+            ", topic_name='" + topic_name + '\'' +
+            '}';
     }
 }

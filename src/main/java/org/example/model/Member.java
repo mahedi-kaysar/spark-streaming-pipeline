@@ -22,9 +22,9 @@ public class Member implements Serializable {
     @Override
     public String toString() {
         return "Member{" +
-                "member_id=" + member_id +
-                ", member_name='" + member_name + '\'' +
-                ", photo='" + photo + '\'' +
-                '}';
+            "member_id=" + member_id +
+            ", member_name='" + member_name + '\'' +
+            ", photo='" + photo + '\'' +
+            '}';
     }
 }

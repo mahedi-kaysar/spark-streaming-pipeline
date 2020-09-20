@@ -2,6 +2,7 @@
 
 set -eu
 
+docker build -t spark-ubuntu:1.0 .
 docker network create --driver bridge meetuprsvps-local-network
 docker run -d -t --name zookeeper --network=meetuprsvps-local-network \
   -e ZOOKEEPER_CLIENT_PORT=2181 \
